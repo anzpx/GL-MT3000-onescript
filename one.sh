@@ -150,10 +150,17 @@ install_istore_os_style() {
 	###fi
 }
 
+update_luci_app_quickstart() {
+	setup_software_source 1
+	opkg install luci-app-quickstart
+	setup_software_source 0
+	echo "首页样式已经更新,请强制刷新网页,检查是否为中文字体"
+}
+
 
 #基础必备设置
 setup_base_init
 #安装iStore风格
 install_istore_os_style
 #再次更新 防止出现汉化不完整
-#update_luci_app_quickstart
+update_luci_app_quickstart
