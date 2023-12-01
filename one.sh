@@ -101,10 +101,10 @@ setup_software_source() {
 
 # 下载和安装依赖
 do_install_depends_ipk() {
-	wget -O "/tmp/iptables-mod-socket_0.00-0_all.ipk" "https://github.com/anzpx/GL-MT3000-onescript/blob/494d0aa3ebfa5bc455fd3bc3b56a67ef575715c2/packages/iptables-mod-socket_0.00-0_all.ipk"
-   wget -O "/tmp/kmod-inet-diag_0.00-0_all.ipk" "https://github.com/anzpx/GL-MT3000-onescript/blob/494d0aa3ebfa5bc455fd3bc3b56a67ef575715c2/packages/kmod-inet-diag_0.00-0_all.ipk"
-   wget -O "/tmp/libopenssl3.ipk" "https://github.com/anzpx/GL-MT3000-onescript/blob/494d0aa3ebfa5bc455fd3bc3b56a67ef575715c2/packages/libopenssl3.ipk"
-   wget -O "/tmp/luci-lua-runtime_all.ipk" "https://github.com/anzpx/GL-MT3000-onescript/blob/494d0aa3ebfa5bc455fd3bc3b56a67ef575715c2/packages/luci-lua-runtime_all.ipk"
+	wget -O "/tmp/iptables-mod-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/iptables-mod-socket_0.00-0_all.ipk"
+   wget -O "/tmp/kmod-inet-diag_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-inet-diag_0.00-0_all.ipk"
+   wget -O "/tmp/libopenssl3.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/libopenssl3.ipk"
+   wget -O "/tmp/luci-lua-runtime_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/luci-lua-runtime_all.ipk"
 
 	opkg install "/tmp/iptables-mod-socket_0.00-0_all.ipk"
    opkg install "/tmp/kmod-inet-diag_0.00-0_all.ipk"
