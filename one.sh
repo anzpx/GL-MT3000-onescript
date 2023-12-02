@@ -28,8 +28,7 @@ add_dhcp_domain() {
    else
       echo "相同的域名记录已存在，无需重复添加"
    fi
-   echo -e "\n"
-   echo -e "time.android.com    203.107.6.88 "
+   echo "time.android.com    203.107.6.88 "
    echo
 }
 
