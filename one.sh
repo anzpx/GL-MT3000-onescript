@@ -248,5 +248,8 @@ echo "开始安装......"
 # | grep browser_download_url 
 # | grep linux_amd64 
 # | cut -d '"' -f 4 | wget -i -
-curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep passwall_packages_ipk_aarch64_cortex-a53
+curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-app-passwall | cut -d '"' -f 4 
+curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-i18n-passwall-zh-cn | cut -d '"' -f 4 
+curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep passwall_packages_ipk_aarch64_cortex-a53.zip | cut -d '"' -f 4 | wget -i -
+
 clear
