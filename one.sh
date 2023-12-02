@@ -117,7 +117,7 @@ do_install_depends_ipk() {
 #单独安装argon主题
 do_install_argon_skin() {
 	echo "正在尝试安装argon主题......."
-	opkg install luci-app-argon-config
+	#opkg install luci-app-argon-config
    opkg install luci-theme-edge
 	# 检查上一个命令的返回值
 	if [ $? -eq 0 ]; then
@@ -216,7 +216,7 @@ echo
 #基础必备设置
 setup_base_init
 #设置第三方软件仓库
-#setup_software_source 1		
+setup_software_source 1		
 # 设置第三方源后要更新
 echo "更新软件包列表"
 opkg update
