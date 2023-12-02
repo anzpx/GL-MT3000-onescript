@@ -110,11 +110,14 @@ do_install_depends_ipk() {
    wget -O "/tmp/kmod-inet-diag_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-inet-diag_0.00-0_all.ipk"
    wget -O "/tmp/libopenssl3.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/libopenssl3.ipk"
    wget -O "/tmp/luci-lua-runtime_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/luci-lua-runtime_all.ipk"
+   wget -O "/tmp/kmod-ipt-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-ipt-socket_0.00-0_all.ipk"
+
 
 	opkg install "/tmp/iptables-mod-socket_0.00-0_all.ipk"
    opkg install "/tmp/kmod-inet-diag_0.00-0_all.ipk"
    opkg install "/tmp/libopenssl3.ipk"
    opkg install "/tmp/luci-lua-runtime_all.ipk"
+   opkg install "/tmp/kmod-ipt-socket_0.00-0_all.ipk"
    echo
 }
 
