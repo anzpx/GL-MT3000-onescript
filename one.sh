@@ -102,7 +102,7 @@ setup_software_source() {
 # 下载和安装依赖
 do_install_depends_ipk() {
    echo "正在下载并安装必要依赖"
-	wget -O "/tmp/iptables-mod-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/iptables-mod-socket_0.00-0_all.ipk"
+   wget -O "/tmp/iptables-mod-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/iptables-mod-socket_0.00-0_all.ipk"
    wget -O "/tmp/kmod-inet-diag_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-inet-diag_0.00-0_all.ipk"
    wget -O "/tmp/libopenssl3.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/libopenssl3.ipk"
    wget -O "/tmp/luci-lua-runtime_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/luci-lua-runtime_all.ipk"
@@ -118,6 +118,7 @@ do_install_depends_ipk() {
 do_install_argon_skin() {
 	echo "正在尝试安装argon主题......."
 	opkg install luci-app-argon-config
+   # luci-theme-edge
 	# 检查上一个命令的返回值
 	if [ $? -eq 0 ]; then
 		echo "argon主题 安装成功"
@@ -137,6 +138,46 @@ do_install_luci_app_quickstart() {
 	echo "首页样式已经更新,请强制刷新网页,检查是否为中文字体"
 }
 
+# 安装首页及其所需软件
+install_istore_os_style() {
+
+   echo "安装首页风格"
+   opkg install luci-app-quickstart
+	echo
+
+   echo "安装ddnsto app-meta-ddnsto"
+   sh -c "$(wget --no-check-certificate -qO- http://fw.koolcenter.com/binary/ddnsto/openwrt/install_ddnsto.sh)"
+   echo
+
+   echo "安装易有云 app-meta-linkease"
+   sh -c "$(wget --no-check-certificate -qO- http://fw.koolcenter.com/binary/LinkEase/Openwrt/install_linkease.sh)"
+   echo
+
+   echo "安装磁盘管理"
+   opkg install luci-app-diskman
+   echo
+
+   # diskman
+   # samba4
+   # GoWebDAV 插件
+   # 带宽监控
+   # Homebox 插件
+   # SysTools 插件
+   # feed
+
+   # Aria2 插件
+   # Transmission 插件
+   # qBittorrent 插件
+
+   # opkg install luci-app-gowebdav
+
+
+	# 若已安装iStore商店则在概览中追加iStore字样
+	# if ! grep -q " like iStoreOS" /tmp/sysinfo/model; then
+	# 	sed -i '1s/$/ like iStoreOS/' /tmp/sysinfo/model
+	# fi
+}
+
 echo "开始安装......"
 echo
 
@@ -148,21 +189,8 @@ setup_software_source 1
 do_install_depends_ipk
 #设置Argon 紫色主题
 do_install_argon_skin
-#安装首页风格
-do_install_luci_app_quickstart
-echo "安装易有云"
-sh -c "$(wget --no-check-certificate -qO- http://fw.koolcenter.com/binary/LinkEase/Openwrt/install_linkease.sh)"
-echo
-
-	###is-opkg install 'app-meta-ddnsto'
-	#安装首页需要的文件管理功能
-	###is-opkg install 'app-meta-linkease'
-	# 安装磁盘管理
-	###is-opkg install 'app-meta-diskman'
-	# 若已安装iStore商店则在概览中追加iStore字样
-	###if ! grep -q " like iStoreOS" /tmp/sysinfo/model; then
-		### sed -i '1s/$/ like iStoreOS/' /tmp/sysinfo/model
-	###fi
+# 安装首页及其所需软件
+install_istore_os_style
 
 
 #再次更新 防止出现汉化不完整
