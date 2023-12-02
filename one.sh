@@ -157,19 +157,26 @@ install_istore_os_style() {
    opkg install luci-app-diskman
    echo
 
-   # diskman
+   # luci-app-aria2
+   echo "安装Aria2 插件"
+   opkg install luci-i18n-aria2-zh-cn
+   echo
+
+   echo "安装GoWebDAV 插件"
+   opkg install luci-app-gowebdav
+   echo
+ 
+  
    # samba4
-   # GoWebDAV 插件
+   
    # 带宽监控
    # Homebox 插件
    # SysTools 插件
    # feed
 
-   # Aria2 插件
+
    # Transmission 插件
    # qBittorrent 插件
-
-   # opkg install luci-app-gowebdav
 
 
 	# 若已安装iStore商店则在概览中追加iStore字样
