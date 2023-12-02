@@ -223,7 +223,7 @@ setup_base_init
 #设置第三方软件仓库
 setup_software_source 1
 #下载和安装必须的依赖
-#do_install_depends_ipk
+do_install_depends_ipk
 #设置Argon 紫色主题
 #do_install_argon_skin
 
