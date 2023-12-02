@@ -220,17 +220,17 @@ setup_base_init
 #设置第三方软件仓库
 setup_software_source 1
 #下载和安装必须的依赖
-do_install_depends_ipk
+#do_install_depends_ipk
 #设置Argon 紫色主题
-do_install_argon_skin
+#do_install_argon_skin
 
 # 安装首页及其所需软件
 # install_istore_os_style
 
 # 安装passwall
-do_install_passwall
+#do_install_passwall
 # 安装passwall2
-do_install_passwall2
+#do_install_passwall2
 
 #再次更新 防止出现汉化不完整
 #do_install_luci_app_quickstart
