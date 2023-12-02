@@ -165,6 +165,16 @@ install_istore_os_style() {
    echo "安装GoWebDAV 插件"
    opkg install luci-app-gowebdav
    echo
+
+   #判断是否安装 json解析工具“jq”
+   # if [ `command -v jq` ];then
+   #    echo 'jq 已经安装'
+   # else
+   #    echo 'jq 未安装,开始安装json解析工具'
+   # #安装jq
+   #    brew install jq
+   # fi
+
  
   
    # samba4
@@ -185,6 +195,18 @@ install_istore_os_style() {
 	# fi
 }
 
+do_install_passwall(){
+   echo "开始安装passwall......"
+   opkg install luci-app-passwall
+   echo
+}
+
+do_install_passwall2(){
+   echo "开始安装passwall2......"
+   opkg install luci-app-passwall2
+   echo
+}
+
 echo "开始安装......"
 echo
 
@@ -196,9 +218,14 @@ setup_software_source 1
 do_install_depends_ipk
 #设置Argon 紫色主题
 do_install_argon_skin
-# 安装首页及其所需软件
-install_istore_os_style
 
+# 安装首页及其所需软件
+# install_istore_os_style
+
+# 安装passwall
+do_install_passwall
+# 安装passwall2
+do_install_passwall2
 
 #再次更新 防止出现汉化不完整
 #do_install_luci_app_quickstart
