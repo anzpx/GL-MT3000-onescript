@@ -239,6 +239,7 @@ do_install_app() {
    # echo
 }
 
+clear
 echo
 echo "开始安装......"
 
