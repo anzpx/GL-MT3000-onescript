@@ -101,6 +101,7 @@ setup_software_source() {
 
 # 下载和安装依赖
 do_install_depends_ipk() {
+   echo "正在下载并安装必要依赖"
 	wget -O "/tmp/iptables-mod-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/iptables-mod-socket_0.00-0_all.ipk"
    wget -O "/tmp/kmod-inet-diag_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-inet-diag_0.00-0_all.ipk"
    wget -O "/tmp/libopenssl3.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/libopenssl3.ipk"
@@ -110,14 +111,12 @@ do_install_depends_ipk() {
    opkg install "/tmp/kmod-inet-diag_0.00-0_all.ipk"
    opkg install "/tmp/libopenssl3.ipk"
    opkg install "/tmp/luci-lua-runtime_all.ipk"
+   echo
 }
 
 #单独安装argon主题
 do_install_argon_skin() {
 	echo "正在尝试安装argon主题......."
-	#下载和安装argon的依赖
-	do_install_depends_ipk
-	setup_software_source 1
 	opkg install luci-app-argon-config
 	# 检查上一个命令的返回值
 	if [ $? -eq 0 ]; then
@@ -130,15 +129,31 @@ do_install_argon_skin() {
 	else
 		echo "argon主题 安装失败! 建议再执行一次!再给我一个机会!事不过三!"
 	fi
-	setup_software_source 0
 }
 
-## 安装主题
-install_istore_os_style() {
-	##设置Argon 紫色主题
-	do_install_argon_skin
-	#安装首页风格
-	###is-opkg install luci-app-quickstart
+#安装首页风格
+do_install_luci_app_quickstart() {
+	opkg install luci-app-quickstart
+	echo "首页样式已经更新,请强制刷新网页,检查是否为中文字体"
+}
+
+echo "开始安装......"
+echo
+
+#基础必备设置
+setup_base_init
+#设置第三方软件仓库
+setup_software_source 1
+#下载和安装必须的依赖
+do_install_depends_ipk
+#设置Argon 紫色主题
+do_install_argon_skin
+#安装首页风格
+do_install_luci_app_quickstart
+echo "安装易有云"
+sh -c "$(wget --no-check-certificate -qO- http://fw.koolcenter.com/binary/LinkEase/Openwrt/install_linkease.sh)"
+echo
+
 	###is-opkg install 'app-meta-ddnsto'
 	#安装首页需要的文件管理功能
 	###is-opkg install 'app-meta-linkease'
@@ -148,19 +163,10 @@ install_istore_os_style() {
 	###if ! grep -q " like iStoreOS" /tmp/sysinfo/model; then
 		### sed -i '1s/$/ like iStoreOS/' /tmp/sysinfo/model
 	###fi
-}
-
-update_luci_app_quickstart() {
-	setup_software_source 1
-	opkg install luci-app-quickstart
-	setup_software_source 0
-	echo "首页样式已经更新,请强制刷新网页,检查是否为中文字体"
-}
 
 
-#基础必备设置
-setup_base_init
-#安装iStore风格
-install_istore_os_style
 #再次更新 防止出现汉化不完整
-update_luci_app_quickstart
+#do_install_luci_app_quickstart
+
+#恢复第三方软件仓库
+setup_software_source 0
