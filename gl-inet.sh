@@ -108,7 +108,9 @@ setup_software_source() {
 			echo
 		fi
 		# 还原软件源之后更新
+		echo "更新软件包列表"
 		opkg update
+		echo
 	elif [ "$1" -eq 1 ]; then
 		#传入1 代表设置第三方软件源 先要删掉签名
 		remove_check_signature_option
@@ -116,7 +118,9 @@ setup_software_source() {
 		echo "# add your custom package feeds here" >/etc/opkg/customfeeds.conf
 		echo "src/gz third_party_source $third_party_source" >>/etc/opkg/customfeeds.conf
 		# 设置第三方源后要更新
+		echo "更新软件包列表"
 		opkg update
+		echo
 	else
 		echo "Invalid option. Please provide 0 or 1."
 	fi
