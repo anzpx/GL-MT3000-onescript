@@ -118,12 +118,12 @@ do_install_depends_ipk() {
 do_install_argon_skin() {
 	echo "正在尝试安装argon主题......."
 	opkg install luci-app-argon-config
-   # luci-theme-edge
+   opkg install luci-theme-edge
 	# 检查上一个命令的返回值
 	if [ $? -eq 0 ]; then
 		echo "argon主题 安装成功"
 		# 设置主题和语言
-		uci set luci.main.mediaurlbase='/luci-static/argon'
+		uci set luci.main.mediaurlbase='/luci-static/edge'
 		uci set luci.main.lang='zh_cn'
 		uci commit
 		echo "重新登录web页面后, 查看新主题 "
@@ -132,6 +132,8 @@ do_install_argon_skin() {
 	fi
    echo
 }
+
+
 
 #安装首页风格
 do_install_luci_app_quickstart() {
