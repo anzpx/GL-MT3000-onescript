@@ -2,6 +2,7 @@
 
 # 第三方软件仓库
 third_party_source="https://op.dllkids.xyz/packages/aarch64_cortex-a53"
+#https://dl.openwrt.ai/packages-23.05/aarch64_cortex-a53/kiddin9
 
 #添加出处信息
 add_author_info() {
@@ -83,20 +84,12 @@ setup_software_source() {
 		else
 			echo
 		fi
-		# 还原软件源之后更新
-		echo "更新软件包列表"
-		opkg update
-		echo
 	elif [ "$1" -eq 1 ]; then
 		#传入1 代表设置第三方软件源 先要删掉签名
 		remove_check_signature_option
 		# 先删除再添加以免重复
 		echo "# add your custom package feeds here" >/etc/opkg/customfeeds.conf
 		echo "src/gz third_party_source $third_party_source" >>/etc/opkg/customfeeds.conf
-		# 设置第三方源后要更新
-		echo "更新软件包列表"
-		opkg update
-		echo
 	else
 		echo "无效选项。请提供0或1。"
 	fi
@@ -221,7 +214,11 @@ echo
 #基础必备设置
 setup_base_init
 #设置第三方软件仓库
-#setup_software_source 1
+#setup_software_source 1		
+# 设置第三方源后要更新
+echo "更新软件包列表"
+opkg update
+echo
 #下载和安装必须的依赖
 do_install_depends_ipk
 #设置Argon 紫色主题
@@ -240,3 +237,6 @@ do_install_passwall2
 
 #恢复第三方软件仓库
 #setup_software_source 0
+# echo "更新软件包列表"
+# opkg update
+# echo
