@@ -134,6 +134,7 @@ do_install_argon_skin() {
 	else
 		echo "argon主题 安装失败! 建议再执行一次!再给我一个机会!事不过三!"
 	fi
+   echo
 }
 
 #安装首页风格
@@ -235,4 +236,4 @@ do_install_passwall2
 #do_install_luci_app_quickstart
 
 #恢复第三方软件仓库
-setup_software_source 0
+#setup_software_source 0
