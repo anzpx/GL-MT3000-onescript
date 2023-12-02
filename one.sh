@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # 第三方软件仓库
-third_party_source="https://op.dllkids.xyz/packages/aarch64_cortex-a53"
-#https://dl.openwrt.ai/packages-23.05/aarch64_cortex-a53/kiddin9
+#third_party_source="https://op.dllkids.xyz/packages/aarch64_cortex-a53"
+third_party_source="https://dl.openwrt.ai/packages-23.05/aarch64_cortex-a53/kiddin9"
 
 #添加出处信息
 add_author_info() {
