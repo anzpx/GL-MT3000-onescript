@@ -24,7 +24,6 @@ add_dhcp_domain() {
       uci set "dhcp.@domain[-1].name=$domain_name"
       uci set "dhcp.@domain[-1].ip=$domain_ip"
       uci commit dhcp
-      echo
       echo "已添加新的域名记录"
    else
       echo "相同的域名记录已存在，无需重复添加"
@@ -105,19 +104,20 @@ setup_software_source() {
 
 # 下载和安装依赖
 do_install_depends_ipk() {
-   echo "正在下载并安装必要依赖"
+   echo "开始下载必要依赖"
    wget -O "/tmp/iptables-mod-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/iptables-mod-socket_0.00-0_all.ipk"
    wget -O "/tmp/kmod-inet-diag_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-inet-diag_0.00-0_all.ipk"
    wget -O "/tmp/libopenssl3.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/libopenssl3.ipk"
    wget -O "/tmp/luci-lua-runtime_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/luci-lua-runtime_all.ipk"
-   wget -O "/tmp/kmod-ipt-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-ipt-socket_0.00-0_all.ipk"
+   # wget -O "/tmp/kmod-ipt-socket_0.00-0_all.ipk" "https://raw.githubusercontent.com/anzpx/GL-MT3000-onescript/main/packages/kmod-ipt-socket_0.00-0_all.ipk"
+   echo
 
-
+   echo "开始安装必要依赖"
 	opkg install "/tmp/iptables-mod-socket_0.00-0_all.ipk"
    opkg install "/tmp/kmod-inet-diag_0.00-0_all.ipk"
    opkg install "/tmp/libopenssl3.ipk"
    opkg install "/tmp/luci-lua-runtime_all.ipk"
-   opkg install "/tmp/kmod-ipt-socket_0.00-0_all.ipk"
+   # opkg install "/tmp/kmod-ipt-socket_0.00-0_all.ipk"
    echo
 }
 
@@ -225,15 +225,15 @@ setup_software_source 1
 #下载和安装必须的依赖
 do_install_depends_ipk
 #设置Argon 紫色主题
-#do_install_argon_skin
+do_install_argon_skin
 
 # 安装首页及其所需软件
 # install_istore_os_style
 
 # 安装passwall
-#do_install_passwall
+do_install_passwall
 # 安装passwall2
-#do_install_passwall2
+do_install_passwall2
 
 #再次更新 防止出现汉化不完整
 #do_install_luci_app_quickstart
