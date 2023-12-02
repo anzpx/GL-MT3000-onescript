@@ -244,6 +244,9 @@ echo
 echo "开始安装......"
 
 #cd /tmp
-#curl -Ls https://api.github.com/repos/xenolf/lego/releases/latest | grep browser_download_url | grep linux_amd64 | cut -d '"' -f 4 | wget -i -
-curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url
+# curl -Ls https://api.github.com/repos/xenolf/lego/releases/latest 
+# | grep browser_download_url 
+# | grep linux_amd64 
+# | cut -d '"' -f 4 | wget -i -
+curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep passwall_packages_ipk_aarch64_cortex-a53
 clear
