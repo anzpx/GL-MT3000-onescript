@@ -30,6 +30,7 @@ add_dhcp_domain() {
    fi
    echo -e "\n"
    echo -e "time.android.com    203.107.6.88 "
+   echo
 }
 
 # 基础必备设置
