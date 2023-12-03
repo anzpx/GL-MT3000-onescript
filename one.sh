@@ -281,7 +281,7 @@ do_install_passwall_packages() {
    else
       OS_ARCH=$(uname -m)
    fi
-   
+
    case ${OS_ARCH} in
    *86)
       FILE_KEYWORD='i386'
@@ -305,6 +305,8 @@ do_install_passwall_packages() {
    echo -e "${INFO} 获取 ${project_name} 下载URL ..."
    local download_url=$(curl -fsSL ${gh_api_url} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
    echo -e "${INFO} 下载URL: ${download_url}"
+
+   echo -e "${INFO} 正在安装 ${PROJECT_NAME} ..."
 
    # local_file_path="/tmp/gl-inet.run"
    # wget -O "$local_file_path" "$download_url"
