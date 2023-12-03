@@ -255,6 +255,7 @@ do_install_app() {
 # 安装passwall的依赖包
 do_install_passwall_packages() {
    echo -e "${INFO} 安装passwall的依赖包"
+   local project_name='openwrt-passwall'
    local gh_api_url='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
    local local_dir='/tmp/passwall'
    local file_full_name='passwall_packages.zip'
@@ -264,7 +265,44 @@ do_install_passwall_packages() {
       echo -e "${ERROR} 操作系统不被支持。"
       exit 1
    fi
-   # 获取下载连接
+
+   if [[ $(id -u) != 0 ]]; then
+      echo -e "${ERROR} 脚本必须在root账户下运行。"
+      exit 1
+   fi
+
+   echo -e "${INFO} Get CPU architecture ..."
+   if [[ $(command -v apk) ]]; then
+      PKGT='(apk)'
+      OS_ARCH=$(apk --print-arch)
+   elif [[ $(command -v dpkg) ]]; then
+      PKGT='(dpkg)'
+      OS_ARCH=$(dpkg --print-architecture | awk -F- '{ print $NF }')
+   else
+      OS_ARCH=$(uname -m)
+   fi
+   
+   case ${OS_ARCH} in
+   *86)
+      FILE_KEYWORD='i386'
+      ;;
+   x86_64 | amd64)
+      FILE_KEYWORD='amd64'
+      ;;
+   aarch64 | arm64)
+      FILE_KEYWORD='arm64'
+      ;;
+   arm*)
+      FILE_KEYWORD='armhf'
+      ;;
+   *)
+      echo -e "${ERROR} Unsupported architecture: ${OS_ARCH} ${PKGT}"
+      exit 1
+      ;;
+   esac
+   echo -e "${INFO} Architecture: ${OS_ARCH} ${PKGT}"
+
+   echo -e "${INFO} 获取 ${project_name} 下载URL ..."
    local download_url=$(curl -fsSL ${gh_api_url} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
    echo -e "${INFO} 下载URL: ${download_url}"
 
