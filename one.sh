@@ -248,11 +248,12 @@ do_install_passwall_packages(){
 }
 
 
-clear
-echo
-echo "开始安装......"
 
-cd /tmp/tmp
+clear
+echo "开始安装......"
+# 安装passwall的依赖包
+do_install_passwall_packages
+
 
 
 # curl -Ls https://api.github.com/repos/xenolf/lego/releases/latest 
