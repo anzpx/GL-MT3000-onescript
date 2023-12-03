@@ -259,7 +259,7 @@ do_install_passwall_packages() {
    LOCAL_DIR='/tmp/passwall'
    FILE_FULL_Name=''
 
-   if [[ $(uname -s) != Linux ]]; then
+   if [[ $(uname -s) != "Linux" ]]; then
       echo -e "${ERROR} 操作系统不被支持。"
       exit 1
    fi
