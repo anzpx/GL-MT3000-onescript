@@ -259,7 +259,7 @@ do_install_passwall_packages() {
    local gh_api_url='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
    local local_dir='/tmp/passwall'
    local file_full_name='passwall_packages.zip'
-   local local_file="${local_dir}/${file_full_name}"
+   local local_file_path="${local_dir}/${file_full_name}"
 
    if [[ $(uname -s) != Linux ]]; then
       echo -e "${ERROR} 操作系统不被支持。"
@@ -307,20 +307,10 @@ do_install_passwall_packages() {
    local download_url=$(curl -fsSL ${gh_api_url} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
    echo -e "${INFO} 下载URL: ${download_url}"
 
-   echo -e "${INFO} 正在安装 ${PROJECT_NAME} ..."
+   echo -e "${INFO} 正在下载 ${project_name} ..."
+   wget -O "${local_file_path}" "${download_url}"
 
-   # local_file_path="/tmp/gl-inet.run"
-   # wget -O "$local_file_path" "$download_url"
-   # chmod +x "$local_file_path"
-   # "$local_file_path"
 
-   # file_full_name=$(echo "$download_url" | cut -d '/' -f 4 )
-
-   # echo "下载文件名 $file_full_name"
-
-   # file_name=$($download_url | cut -d '/' -f 4 )
-   #  下载依赖包
-   # wget -O "/tmp/passwall/libopenssl3.ipk" $download_url
    # 解压安装包
    # unzip $file_full_name
    # 安装所有软件包
