@@ -255,17 +255,18 @@ do_install_app() {
 # 安装passwall的依赖包
 do_install_passwall_packages() {
    echo "安装passwall的依赖包"
-   GH_API_URL='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
-   LOCAL_DIR='/tmp/passwall'
-   FILE_FULL_Name=''
+   local gh_api_url='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
+   local local_dir='/tmp/passwall'
+   local file_full_name='passwall_packages.zip'
+   local local_file="${local_dir}/${file_full_name}"
 
    if [[ $(uname -s) != Linux ]]; then
       echo -e "${ERROR} 操作系统不被支持。"
       exit 1
    fi
    # 获取下载连接
-   DOWNLOAD_URL=$(curl -fsSL ${GH_API_URL} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
-   echo -e "${INFO} 下载URL: ${DOWNLOAD_URL}"
+   local download_url=$(curl -fsSL ${gh_api_url} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
+   echo -e "${INFO} 下载URL: ${download_url}"
 
    # local_file_path="/tmp/gl-inet.run"
    # wget -O "$local_file_path" "$download_url"
