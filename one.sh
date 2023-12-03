@@ -263,7 +263,6 @@ do_install_passwall_packages() {
       echo -e "${ERROR} 操作系统不被支持。"
       exit 1
    fi
-
    # 获取下载连接
    DOWNLOAD_URL=$(curl -fsSL ${GH_API_URL} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
    echo -e "${INFO} 下载URL: ${DOWNLOAD_URL}"
