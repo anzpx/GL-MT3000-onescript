@@ -280,6 +280,7 @@ do_install_passwall_packages() {
       OS_ARCH=$(dpkg --print-architecture | awk -F- '{ print $NF }')
    else
       OS_ARCH=$(uname -m)
+      PKGT='错误'
    fi
 
    case ${OS_ARCH} in
