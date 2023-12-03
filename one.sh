@@ -254,7 +254,7 @@ do_install_app() {
 
 # 安装passwall的依赖包
 do_install_passwall_packages() {
-   echo "安装passwall的依赖包"
+   echo -e "${INFO} 安装passwall的依赖包"
    local gh_api_url='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
    local local_dir='/tmp/passwall'
    local file_full_name='passwall_packages.zip'
