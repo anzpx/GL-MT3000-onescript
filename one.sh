@@ -1,5 +1,18 @@
 #!/bin/sh
 
+set -o errexit
+set -o errtrace
+set -o pipefail
+set -o nounset
+
+Green_font_prefix="\033[32m"
+Red_font_prefix="\033[31m"
+Green_background_prefix="\033[42;37m"
+Red_background_prefix="\033[41;37m"
+Font_color_suffix="\033[0m"
+INFO="[${Green_font_prefix}INFO${Font_color_suffix}]"
+ERROR="[${Red_font_prefix}ERROR${Font_color_suffix}]"
+
 # 第三方软件仓库
 # 只能装passwall2
 #third_party_source="https://op.dllkids.xyz/packages/aarch64_cortex-a53"
@@ -242,14 +255,33 @@ do_install_app() {
 # 安装passwall的依赖包
 do_install_passwall_packages(){
    echo "安装passwall的依赖包"
+   GH_API_URL='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
+
    # 获取下载连接
-   download_url=$(curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep passwall_packages_ipk_aarch64_cortex-a53.zip | cut -d '"' -f 4)
-   echo "下载文件地址 $download_url"
-   file_name=$(echo "$download_url" | cut -d '/' -f 4 )
-   echo "下载文件名 $file_name"
+   DOWNLOAD_URL=$(curl -fsSL ${GH_API_URL} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
+   echo -e "${INFO} 下载URL地址: ${DOWNLOAD_URL}"
+
+
+   # local_file_path="/tmp/gl-inet.run"
+	# wget -O "$local_file_path" "$download_url"
+	# chmod +x "$local_file_path"
+	# "$local_file_path"
+
+
+
+   # file_full_name=$(echo "$download_url" | cut -d '/' -f 4 )
+  
+
+
+   # echo "下载文件名 $file_full_name"
+
    # file_name=$($download_url | cut -d '/' -f 4 )
-   
+   #  下载依赖包
    # wget -O "/tmp/passwall/libopenssl3.ipk" $download_url
+   # 解压安装包
+   # unzip $file_full_name
+   # 安装所有软件包
+   # opkg install *.ipk --force-reinstall
 }
 
 
