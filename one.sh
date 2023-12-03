@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# set -o errexit
+set -o errexit
 # set -o errtrace
-# set -o pipefail
-# set -o nounset
+set -o pipefail
+set -o nounset
 
 Green_font_prefix="\033[32m"
 Red_font_prefix="\033[31m"
