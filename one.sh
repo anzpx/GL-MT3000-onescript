@@ -253,25 +253,27 @@ do_install_app() {
 }
 
 # 安装passwall的依赖包
-do_install_passwall_packages(){
+do_install_passwall_packages() {
    echo "安装passwall的依赖包"
    GH_API_URL='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
+   LOCAL_DIR='/tmp/passwall'
+   FILE_FULL_Name=''
+
+   if [[ $(uname -s) == Linux ]]; then
+      echo -e "${ERROR} 操作系统不被支持。"
+      exit 1
+   fi
 
    # 获取下载连接
    DOWNLOAD_URL=$(curl -fsSL ${GH_API_URL} | grep 'browser_download_url' | grep 'passwall_packages_ipk_aarch64_cortex-a53.zip' | cut -d '"' -f 4)
-   echo -e "${INFO} 下载URL地址: ${DOWNLOAD_URL}"
-
+   echo -e "${INFO} 下载URL: ${DOWNLOAD_URL}"
 
    # local_file_path="/tmp/gl-inet.run"
-	# wget -O "$local_file_path" "$download_url"
-	# chmod +x "$local_file_path"
-	# "$local_file_path"
-
-
+   # wget -O "$local_file_path" "$download_url"
+   # chmod +x "$local_file_path"
+   # "$local_file_path"
 
    # file_full_name=$(echo "$download_url" | cut -d '/' -f 4 )
-  
-
 
    # echo "下载文件名 $file_full_name"
 
@@ -284,21 +286,17 @@ do_install_passwall_packages(){
    # opkg install *.ipk --force-reinstall
 }
 
-
-
 clear
 echo "开始安装......"
 # 安装passwall的依赖包
 do_install_passwall_packages
 
-
-
-# curl -Ls https://api.github.com/repos/xenolf/lego/releases/latest 
-# | grep browser_download_url 
-# | grep linux_amd64 
+# curl -Ls https://api.github.com/repos/xenolf/lego/releases/latest
+# | grep browser_download_url
+# | grep linux_amd64
 # | cut -d '"' -f 4 | wget -i -
-# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-app-passwall | cut -d '"' -f 4 
-# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-i18n-passwall-zh-cn | cut -d '"' -f 4 
-# 
+# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-app-passwall | cut -d '"' -f 4
+# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-i18n-passwall-zh-cn | cut -d '"' -f 4
+#
 
 # clear
