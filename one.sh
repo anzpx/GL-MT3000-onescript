@@ -244,7 +244,12 @@ do_install_passwall_packages(){
    echo "安装passwall的依赖包"
    # 获取下载连接
    download_url=$(curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep passwall_packages_ipk_aarch64_cortex-a53.zip | cut -d '"' -f 4)
-   wget -O "/tmp/libopenssl3.ipk" $download_url
+   echo "下载文件地址 $download_url"
+   file_name=$($download_url | cut -d '/' -f 4 )
+   echo "下载文件名 $file_name"
+   # file_name=$($download_url | cut -d '/' -f 4 )
+   
+   # wget -O "/tmp/passwall/libopenssl3.ipk" $download_url
 }
 
 
