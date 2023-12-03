@@ -239,17 +239,28 @@ do_install_app() {
    # echo
 }
 
+# 安装passwall的依赖包
+do_install_passwall_packages(){
+   echo "安装passwall的依赖包"
+   # 获取下载连接
+   download_url=$(curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep passwall_packages_ipk_aarch64_cortex-a53.zip | cut -d '"' -f 4)
+   wget -O "/tmp/libopenssl3.ipk" $download_url
+}
+
+
 clear
 echo
 echo "开始安装......"
 
-#cd /tmp
+cd /tmp/tmp
+
+
 # curl -Ls https://api.github.com/repos/xenolf/lego/releases/latest 
 # | grep browser_download_url 
 # | grep linux_amd64 
 # | cut -d '"' -f 4 | wget -i -
-curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-app-passwall | cut -d '"' -f 4 
-curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-i18n-passwall-zh-cn | cut -d '"' -f 4 
-curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep passwall_packages_ipk_aarch64_cortex-a53.zip | cut -d '"' -f 4 | wget -i -
+# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-app-passwall | cut -d '"' -f 4 
+# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-i18n-passwall-zh-cn | cut -d '"' -f 4 
+# 
 
-clear
+# clear
