@@ -253,7 +253,7 @@ do_install_app() {
 }
 
 # 安装passwall的依赖包
-do_install_passwall_packages() {
+function do_install_passwall_packages() {
    echo -e "${INFO} 安装passwall的依赖包"
    local project_name='openwrt-passwall'
    local gh_api_url='https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest'
@@ -322,12 +322,3 @@ echo "开始安装......"
 # 安装passwall的依赖包
 do_install_passwall_packages
 
-# curl -Ls https://api.github.com/repos/xenolf/lego/releases/latest
-# | grep browser_download_url
-# | grep linux_amd64
-# | cut -d '"' -f 4 | wget -i -
-# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-app-passwall | cut -d '"' -f 4
-# curl -Ls https://api.github.com/repos/xiaorouji/openwrt-passwall/releases/latest | grep browser_download_url | grep luci-i18n-passwall-zh-cn | cut -d '"' -f 4
-#
-
-# clear
